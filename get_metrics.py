@@ -19,8 +19,13 @@ args = parser.parse_args()
 ipv4 = 'http://{}:9109/metrics'.format(args.ipv4)
 interval = args.interval
 
+proxies = {
+    'http': '',
+    'https': ''
+}
+
 while True:
-    response = requests.get(ipv4)
+    response = requests.get(ipv4, proxies=proxies)
     current_time = get_current_time()
     filename = f"response_{current_time}.txt"
 
@@ -29,4 +34,4 @@ while True:
 
     time.sleep(interval)
 
-# python3 get_metrics.py 192.168.29.30 --interval 30
+# python3 get_metrics.py 192.168.29.30 --interval 20

@@ -24,7 +24,16 @@ proxies = {
     'https': ''
 }
 
+duracao = 3600
+inicio = time.time()
+
 while True:
+    # verificar 1 hora
+    tempo_atual = time.time()
+    if tempo_atual - inicio >= duracao:
+        print('1 hour completed, Finish...')
+        break
+
     response = requests.get(ipv4, proxies=proxies)
     current_time = get_current_time()
     filename = f"response_{current_time}.txt"
@@ -32,6 +41,7 @@ while True:
     save_response_content(response, filename)
     print(f"Saved in: {filename}")
 
+    # esperar intervalo
     time.sleep(interval)
 
 # python3 get_metrics.py 192.168.29.30 --interval 20
